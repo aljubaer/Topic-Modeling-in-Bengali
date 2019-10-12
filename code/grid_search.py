@@ -13,6 +13,7 @@ import re, nltk, gensim
 from sklearn.decomposition import LatentDirichletAllocation, TruncatedSVD
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import GridSearchCV
+from sklearn.externals import joblib
 from pprint import pprint
 
 
@@ -62,9 +63,11 @@ pprint(data[:1])
 
 
 def sent_to_words(sentences):
+    lines = ''
     for sentence in sentences:
-        yield(nltk.word_tokenize(get_valid_lines(sentence)))  # deacc=True removes punctuations
-
+         lines += get_valid_lines(sentence) + ' '  # deacc=True removes punctuations
+    
+    return lines
 data_words = list(sent_to_words(data))
 
 print(data_words[:1])
@@ -74,12 +77,39 @@ from b_parser import RafiStemmer
 
 stemmer = RafiStemmer()
 
-from phonetic_encoder import soundex_encode
+import json
+
+f3 = open('bang_to_eng.txt', 'r', encoding='utf-8')
+f4 = open('eng_to_bang.txt', 'r', encoding='utf-8')
+
+
+b2er = json.loads(f3.read())
+e2br = json.loads(f4.read())
+
+def bang_to_eng_encoder(word):
+    encoded_word = ''
+    for letter in word:
+        if letter >= 'a' and letter <= 'z':
+            continue
+        encoded_word += b2er[letter]
+    return encoded_word
+
+def eng_to_bang_decoder(word):
+    decoded_word = ''
+    for i in range(0, len(word), 2):
+        decoded_word += e2br[word[i] + word[i + 1]]
+    return decoded_word
 
 for row, single_data in enumerate(data_words):
     for column, word in enumerate(single_data):
-        data_words[row][column] = soundex_encode(stemmer.stem_word(word))
+        data_words[row][column] = bang_to_eng_encoder(stemmer.stem_word(word))
+#print(eng_to_bang_decoder('boclbwczbmctcc'))
 print(data_words[:1])
+
+#for row, single_data in enumerate(data_words):
+#    for column, word in enumerate(single_data):
+#        data_words[row][column] = soundex_encode(stemmer.stem_word(word))
+#print(data_words[:1])
 st = []
 
 for s_data in data_words:
@@ -170,10 +200,13 @@ GridSearchCV(cv=None, error_score='raise',
        pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
        scoring=None, verbose=1)
        
+joblib.dump(model.best_estimator_, 'best_estimate.pkl')
 
 
 # Best Model
-best_lda_model = model.best_estimator_
+#best_lda_model = model.best_estimator_
+
+best_lda_model = joblib.load('best_estimate.pkl')
 
 # Model Parameters
 print("Best Model's Params: ", model.best_params_)
@@ -313,12 +346,20 @@ def predict_topic(text):
     global lemmatization
 
     # Step 1: Clean with simple_preprocess
-    mytext_2 = list(sent_to_words(text))
+    mytext_3 = sent_to_words([mytext])
+    mytext_3 = mytext_3.split(' ')
+#    print(mytext_2)
 
     # Step 2: Lemmatize
     #mytext_3 = lemmatization(mytext_2, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
-    mytext_3 = ' '.join(map(str, mytext_2))
-    mytext_3 = [mytext_3]
+#    mytext_3 = ' '.join(map(str, mytext_2))
+#    #mytext_3 = [mytext_3]
+#    print(mytext_3)
+
+    for column, word in enumerate(mytext_3):
+        mytext_3[column] = bang_to_eng_encoder(stemmer.stem_word(word))
+#print(eng_to_bang_decoder('boclbwczbmctcc'))
+    
     
     # Step 3: Vectorize transform
     mytext_4 = vectorizer.transform(mytext_3)
@@ -329,11 +370,29 @@ def predict_topic(text):
     return topic, topic_probability_scores
 
 # Predict the topic
-mytext = ["siya bibisi senabahinir onlain mbail banglades"]
+mytext = "রাবিতে ভর্তি পরীক্ষার"
 topic, prob_scores = predict_topic(text = mytext)
 print(topic)
 
+mytext_3 = sent_to_words([mytext])
+mytext_3 = mytext_3.split(' ')
+    
+for column, word in enumerate(mytext_3):
+    mytext_3[column] = bang_to_eng_encoder(stemmer.stem_word(word))
+#print(eng_to_bang_decoder('boclbwczbmctcc'))
+eng_to_bang_decoder('bqbwcmavczcd')
+    
+    # Step 3: Vectorize transform
 
+mytext_4 = vectorizer.transform(mytext_3)
+
+    # Step 4: LDA Transform
+topic_probability_scores = best_lda_model.transform(mytext_4)
+print(topic)
+a = [eng_to_bang_decoder(i) for i in topic]
+print(a)
+topic = df_topic_keywords.iloc[np.argmax(topic_probability_scores), :].values.tolist()
+return topic, topic_probability_scores
 
 
 # Plot
