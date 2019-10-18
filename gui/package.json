@@ -1,0 +1,31 @@
+{
+    "name": "topic-modeling-bengali",
+    "version": "1.0.0",
+    "description": "Topic Modeling tool for Bengali",
+    "main": "index.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aljubaer/Topic-Modeling-in-Bengali.git"
+    },
+    "keywords": [
+        "Topic",
+        "Documents",
+        "Bangla",
+        "LDA"
+    ],
+    "author": "Abdullah Al Jubaer",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/aljubaer/Topic-Modeling-in-Bengali/issues"
+    },
+    "homepage": "https://github.com/aljubaer/Topic-Modeling-in-Bengali#readme",
+    "devDependencies": {
+        "electron": "^6.0.12"
+    },
+    "dependencies": {
+        "python-shell": "^1.0.8"
+    }
+}
