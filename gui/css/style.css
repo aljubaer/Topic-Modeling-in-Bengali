@@ -8,5 +8,11 @@ hr {
 .output-section {
     border-style: solid;
     border-width: 2px;
-    border-color: blue; 
+    border-color: blue;
+}
+
+#word-cloud {
+    height: 40vh;
+    width: 40vw;
+    margin: 0 auto;
 }
