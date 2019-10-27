@@ -16,3 +16,14 @@ hr {
     width: 40vw;
     margin: 0 auto;
 }
+
+.topic-box {
+    width: 99%;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 0;
+    margin: 2px;
+    padding: 2px;
+    font-size: 16px;
+    font-weight: 400;
+}
