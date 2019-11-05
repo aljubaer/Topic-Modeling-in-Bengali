@@ -113,7 +113,6 @@ function intersect(word, x, y) {
         var word = createWordObject(words[i].word, words[i].freq);
 
         for (var j = 0; j < config.spiralLimit; j++) {
-            //If the spiral function returns true, we've placed the word down and can break from the j loop
             if (spiral(j, function () {
                 if (!intersect(word, startPoint.x + x, startPoint.y + y)) {
                     placeWord(word, startPoint.x + x, startPoint.y + y);
