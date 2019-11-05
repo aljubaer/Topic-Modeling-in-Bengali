@@ -19,17 +19,17 @@
 
 <body>
     <section id="tabs" class="project-tab">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                                role="tab" aria-controls="nav-home" aria-selected="true">Project Tab 1</a>
+                                role="tab" aria-controls="nav-home" aria-selected="true">Data Uploads </a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                role="tab" aria-controls="nav-profile" aria-selected="false">Project Tab 2</a>
+                                role="tab" aria-controls="nav-profile" aria-selected="false">Words Distribution</a>
                             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
-                                role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>
+                                role="tab" aria-controls="nav-contact" aria-selected="false">Topics Distribution</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -41,159 +41,29 @@
                                         placeholder="Your file">
 
                                 </div>
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
 
                                     <button type="button" class="btn btn-outline-primary" onclick="onDataLoad()">Load
                                         Data</button>
-                                </div>
+                                </div> -->
                             </div>
                             <hr />
                             <div class="row" style="margin: 10px 10px">
-                                <div class="col-3" style="padding-top: 40px">
-                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
-                                        aria-orientation="vertical">
-                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
-                                            href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-                                            aria-selected="true">Home</a>
-                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill"
-                                            href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
-                                            aria-selected="false">Profile</a>
-                                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill"
-                                            href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
-                                            aria-selected="false">Messages</a>
-                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill"
-                                            href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
-                                            aria-selected="false">Settings</a>
-                                    </div>
-                                </div>
-                                <div class="col-9 output-section">
-                                    <div class="tab-content" id="v-pills-tabContent">
-                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                                            aria-labelledby="v-pills-home-tab">
-                                            ...
-                                            <div id="word-cloud"></div>
-                                        </div>
-                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                                            aria-labelledby="v-pills-profile-tab">...
-                                            <button onclick="coloringText()">Click</button>
-                                            <div id="document-view">
 
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                                            aria-labelledby="v-pills-messages-tab">...
-                                            <button class="topic-box" onclick="onTopicShow()">Click</button>
-                                            <div class="topic-table-container">
-                                                <div class="topic-box">
-
-                                                    <div class="row output-section" style="border-color: blueviolet">
-                                                        <div class="col-md-2">
-                                                            Topic 1:
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                            Word1(3.06%)
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                                            aria-labelledby="v-pills-settings-tab">...
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Project Name</th>
-                                        <th>Employer</th>
-                                        <th>Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="#">Work 1</a></td>
-                                        <td>Doe</td>
-                                        <td>john@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Work 2</a></td>
-                                        <td>Moe</td>
-                                        <td>mary@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Work 3</a></td>
-                                        <td>Dooley</td>
-                                        <td>july@example.com</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                            <button class="topic-box">10 Topics with 20 words each</button>
+                            <div class="topic-table-container">
+                                <div class="row topic-box" id="topic-container">
+                                </div>
+
+                            </div>
+
                         </div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <table class="table" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Contest Name</th>
-                                        <th>Date</th>
-                                        <th>Award Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="#">Work 1</a></td>
-                                        <td>Doe</td>
-                                        <td>john@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Work 2</a></td>
-                                        <td>Moe</td>
-                                        <td>mary@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Work 3</a></td>
-                                        <td>Dooley</td>
-                                        <td>july@example.com</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
                         </div>
                     </div>
                 </div>
@@ -202,7 +72,8 @@
     </section>
 
 
-    <script src="./word-cloud.js"></script>
+    <script src='./word-cloud.js'></script>
+    <script src='./test.js'></script>
 
 
     <!-- Insert this line above script imports  -->

@@ -107,10 +107,31 @@ function intersect(word, x, y) {
 
 
 /* =======================  LETS GO! =======================  */
-(function placeWords() {
+// (function placeWords() {
+//     for (var i = 0; i < words.length; i += 1) {
+
+//         var word = createWordObject(words[i].word, words[i].freq);
+
+//         for (var j = 0; j < config.spiralLimit; j++) {
+//             if (spiral(j, function () {
+//                 if (!intersect(word, startPoint.x + x, startPoint.y + y)) {
+//                     placeWord(word, startPoint.x + x, startPoint.y + y);
+//                     return true;
+//                 }
+//             })) {
+//                 break;
+//             }
+//         }
+//     }
+// })();
+
+function initWordCloud(id, color, words, contribs) {
+    cloud = document.getElementById(id);
+    cloud.style.color = color;
+
     for (var i = 0; i < words.length; i += 1) {
 
-        var word = createWordObject(words[i].word, words[i].freq);
+        var word = createWordObject(words[i], contribs[i]);
 
         for (var j = 0; j < config.spiralLimit; j++) {
             if (spiral(j, function () {
@@ -123,4 +144,4 @@ function intersect(word, x, y) {
             }
         }
     }
-})();
+}
