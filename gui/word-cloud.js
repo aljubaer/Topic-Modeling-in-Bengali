@@ -21,18 +21,17 @@ words.sort(function (a, b) {
 });
 
 var cloud = document.getElementById("word-cloud");
-cloud.style.position = "relative";
-cloud.style.fontFamily = config.font;
+
 
 var traceCanvas = document.createElement("canvas");
-traceCanvas.width = cloud.offsetWidth;
-traceCanvas.height = cloud.offsetHeight;
+// traceCanvas.width = cloud.offsetWidth;
+// traceCanvas.height = cloud.offsetHeight;
 var traceCanvasCtx = traceCanvas.getContext("2d");
-cloud.appendChild(traceCanvas);
+// cloud.appendChild(traceCanvas);
 
 var startPoint = {
-    x: cloud.offsetWidth / 2,
-    y: cloud.offsetHeight / 2
+    x: 0,
+    y: 0
 };
 
 var wordsDown = [];
@@ -126,11 +125,28 @@ function intersect(word, x, y) {
 // })();
 
 function initWordCloud(id, color, words, contribs) {
+    console.log(id);
     cloud = document.getElementById(id);
+    console.log(cloud);
     cloud.style.color = color;
+    cloud.style.position = "relative";
+    cloud.style.fontFamily = config.font;
+
+
+    traceCanvas.width = cloud.offsetWidth;
+    traceCanvas.height = cloud.offsetHeight;
+
+    cloud.appendChild(traceCanvas);
+
+    startPoint.x = 150;
+    startPoint.y = 150;
+
+    console.log(startPoint.x);
+
 
     for (var i = 0; i < words.length; i += 1) {
 
+        console.log(words[i]);
         var word = createWordObject(words[i], contribs[i]);
 
         for (var j = 0; j < config.spiralLimit; j++) {

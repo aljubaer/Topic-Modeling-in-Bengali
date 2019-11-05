@@ -30,7 +30,7 @@ var testOutput = function () {
 
         for (let i = 0; i < Object.keys(topic_words).length; i++) {
             var topic_words_str_i = '';
-            for (let j = 0; j < 10; j++) {
+            for (let j = 0; j < 20; j++) {
                 topic_words_str_i += '<' + topic_words[i.toString()][j] + '(' + topic_contribs_100[i.toString()][j].toString() + '%)> | ';
             }
             topic_words_str.push(topic_words_str_i);
@@ -60,12 +60,10 @@ var testOutput = function () {
                 </div>        
                 `;
             $('#topic-container').append(topicOutputSection);
-            for (let i = 0; i < Object.keys(topic_words).length; i++) {
-            
-                initWordCloud('topic-cloud' + i.toString(), colors[i], topic_words[i.toString()], topic_contribs_1000[i.toString()]);
-            
-            }
         }
+        // for (let i = 0; i < Object.keys(topic_words).length; i++) {
+        //     initWordCloud('topic-cloud' + i.toString(), colors[i], topic_words[i.toString()], topic_contribs_1000[i.toString()]);
+        // }
 
 
     });
