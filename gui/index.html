@@ -51,7 +51,10 @@
                             <hr />
                             <div class="row" style="margin: 10px 10px">
                                 <div class="col-md-6">
-                                    <input type="text" id="daterange" style="width: 100%"  value="01/01/2018 - 01/15/2018" />
+                                    <input type="text" id="daterange" style="width: 100%; height: 38px;"  value="" />
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="onDateInput()">Submit</button>
                                 </div>
                             </div>
                             
@@ -102,14 +105,23 @@
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
     <script>
+        var startDate = ''
+        var endDate = ''
         $(function() {
-        $('#daterange').daterangepicker({
-            opens: 'left'
-        }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
+            $('#daterange').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                startDate = start.format('YYYY-MM-DD')
+                endDate = end.format('YYYY-MM-DD')
+            });
         });
     </script>
+    
+    <script src='./word-cloud.js'></script>
+    <script src='./test.js'></script>
+    <script src='./input_output.js'></script>
+
 </body>
 
 </html>
