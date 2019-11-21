@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/nav-style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script src='./colored-text.js'></script>
 
     <title>Topic Modeling in Bengali</title>
@@ -49,8 +50,14 @@
                             </div>
                             <hr />
                             <div class="row" style="margin: 10px 10px">
-
+                                <div class="col-md-6">
+                                    <input type="text" id="daterange" style="width: 100%; height: 38px;"  value="" />
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="onDateInput()">Submit</button>
+                                </div>
                             </div>
+                            
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
@@ -91,8 +98,30 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
+    <script>
+        var startDate = ''
+        var endDate = ''
+        $(function() {
+            $('#daterange').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                startDate = start.format('YYYY-MM-DD')
+                endDate = end.format('YYYY-MM-DD')
+            });
+        });
+    </script>
+    
+    <script src='./word-cloud.js'></script>
+    <script src='./test.js'></script>
+    <script src='./input_output.js'></script>
+
 </body>
 
 </html>
