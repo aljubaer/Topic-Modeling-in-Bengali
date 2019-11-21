@@ -1,4 +1,4 @@
 function onDateInput() {
-    console.log(startDate)
-    console.log(endDate)
+    console.log(startDate);
+    console.log(endDate);
 }
