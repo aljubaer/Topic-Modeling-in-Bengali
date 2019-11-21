@@ -53,7 +53,7 @@ var testOutput = function () {
                             <div class="col-md-12" id="topic-words` + i.toString() + `">
                             ` + topic_words_str[i] + `
                             </div>
-                            <div class="col-md-12" id="topic-cloud` + i.toString() + `">
+                            <div class="col-md-12" style="height: 0px" id="topic-cloud` + i.toString() + `">
                             </div>
                         </div>
                     </div>
@@ -61,9 +61,10 @@ var testOutput = function () {
                 `;
             $('#topic-container').append(topicOutputSection);
         }
-        // for (let i = 0; i < Object.keys(topic_words).length; i++) {
-        //     initWordCloud('topic-cloud' + i.toString(), colors[i], topic_words[i.toString()], topic_contribs_1000[i.toString()]);
-        // }
+        for (let i = 0; i < Object.keys(topic_words).length; i++) {
+            // initWordCloud('topic-cloud' + i.toString(), colors[i], topic_words[i.toString()], topic_contribs_1000[i.toString()]);
+            
+        }
 
 
     });
