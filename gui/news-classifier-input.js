@@ -35,7 +35,7 @@ function onDataInput() {
         //     console.log(results);
         // });
 
-        var command = 'python3.7 ' + 'news-classifier.py';
+        var command = 'python ' + 'news-classifier.py';
 
         const child = exec(command,
             (error, stdout, stderr) => {

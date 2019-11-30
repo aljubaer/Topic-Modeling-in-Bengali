@@ -1,7 +1,9 @@
-
 import json
 import nltk
 from b_parser import RafiStemmer
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
 
 def valid_bengali_letters(char):
     return ord(char) >= 2433 and ord(char) <= 2543
@@ -97,6 +99,29 @@ def get_topic_from_int(value):
 lda_json_src = 'model_score_six.json'
 lda_score = json.load(open(lda_json_src, 'r', encoding='utf-8'))
 
+def get_topic_priority_for_the_word(word):
+  numbers = '০১২৩৪৫৬৭৮৯'
+  for i in word:
+    if i in numbers:
+      return 'default'
+  _word = get_valid_lines(word)
+  _word = stemmer.stem_word(_word)
+  if _word not in lda_score:
+    return 'default'
+  max_val = 0.0
+  ans = 'default'
+  words_topic = []
+  _sum = 0
+  for topic in lda_score[_word]:
+    this_topic_score = float(lda_score[_word][topic]['value'])
+    _sum += this_topic_score
+    words_topic.append((this_topic_score, get_topic_from_int(topic)))
+  
+  words_topic.sort(reverse=True)
+  if words_topic[0][0]/_sum > .20:
+    return words_topic[0][1]
+  return 'default'
+
 topic_score_sum = {}
 def get_total_sum_of_scores_for_topic():
   for word in lda_score:
@@ -127,26 +152,49 @@ def calc_score(array, topic):
 
 
 def pred_topic(array):
+  topics = []
   max_score = 0.0
   topic_ans = 0
+  total_score = 0.0
   for i in range(len(dic)):
     this_score = calc_score(array, i)
+    total_score += this_score
+    topics.append((this_score, get_topic_from_int(i)))
     if max_score < this_score:
       max_score = this_score
       topic_ans = i
+      
 #   print(topic_ans)
 #   print(max_score)
-  return get_topic_from_int(str(topic_ans))
+  topics.sort(reverse=True)
+  for i, topic in enumerate(topics):
+    score, _topic = topic
+    score = round((score/total_score) * 100.0)
+    topics[i] = (score, _topic)
+  return topics
 
 
 # ---------------------------------------------------------
 
 
-json_file = open('input.json', encoding='utf-8')
-raw_data_json = json.load(json_file)
-raw_news_data = raw_data_json['news']
-data_processed = single_data_preprocessor(raw_news_data)
+#json_file = open('input.json', encoding='utf-8')
+#raw_data_json = json.load(json_file)
 
-pred = pred_topic(data_processed.split())
+@app.route('/', methods=['POST'])
+def getClassification():
+  raw_news_data = request.get_json()['news']
+  words = {}
+  for word in nltk.word_tokenize(raw_news_data):
+    words[word] = get_topic_priority_for_the_word(word)
+  data_processed = single_data_preprocessor(raw_news_data)
 
-print(pred)
+  pred = pred_topic(data_processed.split())
+  res = {}
+  for score, topic in pred:
+    res[topic] = score
+
+  res['words'] = words
+  return res
+
+if __name__ == '__main__':
+  app.run(debug=True)
