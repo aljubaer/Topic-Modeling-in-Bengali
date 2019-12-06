@@ -193,8 +193,8 @@ def getClassification():
   for score, topic in pred:
     res[topic] = score
 
-  res['words'] = words
-  return res
+  #res['words'] = words
+  return str(res)
 
 if __name__ == '__main__':
   app.run(debug=True)
