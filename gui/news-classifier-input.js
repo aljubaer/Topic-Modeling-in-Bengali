@@ -20,11 +20,18 @@ function onDataInput() {
             news: input.news
         }
     }, (error, res, body) => {
-        if (error) {
-            console.error(error);
-            return;
-        }
-        console.log(`statusCode: ${res.statusCode}`);
-        console.log(body);
+            if (error) {
+                console.error(error);
+                return;
+            }
+            console.log(`statusCode: ${res.statusCode}`);
+            console.log(body);
+            console.log(typeof body);
+            var newBody = body.replace(/'/g, '\"');
+            console.log(newBody);
+            console.log(typeof newBody);
+            let result = JSON.parse(newBody);
+            console.log(typeof result);
+            console.log(result['খেলা']);
     });
 }
