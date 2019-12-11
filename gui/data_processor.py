@@ -13,6 +13,10 @@ from gensim.test.utils import datapath
 from b_parser import RafiStemmer
 from datetime import datetime, timedelta
 import pandas as pd
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
 stemmer = RafiStemmer()
 
 def valid_bengali_letters(char):
@@ -141,8 +145,15 @@ def ldaOutputProducer(lda_model):
     out_df = convertToDataFrame(output_json_list)
     out_json = out_df.to_json(orient='split')
     print(out_json)
+    return str(out_json)
 
-range_day_data_preprocessor('2018-01-01', '2018-01-02')
-print(len(all_data))
-# lda_model = run_lda()
-ldaOutputProducer(run_lda())
+@app.route('/topic-models', methods=['POST'])
+def getTopicModels():
+    start = request.get_json()['start']
+    end = request.get_json()['end']
+    range_day_data_preprocessor(start, end)
+    print(len(all_data))
+    return ldaOutputProducer(run_lda())
+
+if __name__ == '__main__':
+    app.run(debug=True)
