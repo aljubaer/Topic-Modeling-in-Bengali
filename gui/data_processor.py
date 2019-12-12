@@ -101,7 +101,7 @@ def range_day_data_preprocessor(start_date_str, end_date_str):
                 if len(all_data) % 1000 == 0:
                     print('Read data: ', len(all_data))
 
-def run_lda():
+def run_lda(no_topic, alpha='auto', iterations=20):
     # Create Dictionary
     id2word = corpora.Dictionary(all_data)
 
@@ -131,8 +131,8 @@ def convertToDataFrame(data_json):
     print('DataFrame shape' + str(df.shape))
     return df
 
-def ldaOutputProducer(lda_model):
-    x = (lda_model.show_topics(num_topics=3, num_words=100,formatted=False))
+def ldaOutputProducer(lda_model, no_topics, no_words):
+    x = (lda_model.show_topics(num_topics=no_topics, num_words=no_words,formatted=False))
     topics_words = [(tp[0], [wd[0] for wd in tp[1]], [wd[1] for wd in tp[1]]) for tp in x]
     output_json_list = []
     for topic,words,conts in topics_words:
@@ -143,7 +143,7 @@ def ldaOutputProducer(lda_model):
         #topic_json[str(topic)] = topic_content
         output_json_list.append(topic_content)
     out_df = convertToDataFrame(output_json_list)
-    out_json = out_df.to_json(orient='split')
+    out_json = out_df.to_json(force_ascii=False)
     print(out_json)
     return str(out_json)
 
@@ -151,9 +151,11 @@ def ldaOutputProducer(lda_model):
 def getTopicModels():
     start = request.get_json()['start']
     end = request.get_json()['end']
+    no_topic = request.get_json()['number_topics']
+    no_words = request.get_json()['number_words']
     range_day_data_preprocessor(start, end)
     print(len(all_data))
-    return ldaOutputProducer(run_lda())
+    return ldaOutputProducer(run_lda(no_topic), no_topic, no_words)
 
 if __name__ == '__main__':
     app.run(debug=True)
