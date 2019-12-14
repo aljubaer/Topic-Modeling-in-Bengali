@@ -121,11 +121,8 @@
     <script src='./test.js'></script>
 
 
-    <!-- Insert this line above script imports  -->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -139,8 +136,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-
-    <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
     <script>
         
@@ -150,7 +145,17 @@
     <script src='./test.js'></script>
     <script src='./input_output.js'></script>
     <script>
-        
+        $(function () {
+            $('#daterange').daterangepicker({
+                opens: 'left'
+            }, function (start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                startDate = start.format('YYYY-MM-DD');
+                endDate = end.format('YYYY-MM-DD');
+                console.log(startDate)
+                console.log(endDate)
+            });
+        });
     </script>
 
 </body>

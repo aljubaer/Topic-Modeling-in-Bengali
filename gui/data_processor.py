@@ -151,8 +151,8 @@ def ldaOutputProducer(lda_model, no_topics, no_words):
 def getTopicModels():
     start = request.get_json()['start']
     end = request.get_json()['end']
-    no_topic = request.get_json()['number_topics']
-    no_words = request.get_json()['number_words']
+    no_topic = int(request.get_json()['number_topics'])
+    no_words = int(request.get_json()['number_words'])
     range_day_data_preprocessor(start, end)
     print(len(all_data))
     return ldaOutputProducer(run_lda(no_topic), no_topic, no_words)
