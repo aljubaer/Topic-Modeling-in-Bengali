@@ -4,7 +4,8 @@
     "description": "Topic Modeling tool for Bengali",
     "main": "index.js",
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "package-win": "electron-packager . application --overwrite --asar=false --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Topic Modeling\""
     },
     "repository": {
         "type": "git",
@@ -23,9 +24,10 @@
     },
     "homepage": "https://github.com/aljubaer/Topic-Modeling-in-Bengali#readme",
     "devDependencies": {
-        "electron": "^6.0.12"
+        "electron-packager": "^14.1.1"
     },
     "dependencies": {
+        "electron": "^6.0.12",
         "python-shell": "^1.0.8"
     }
 }
