@@ -33,10 +33,8 @@
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                                role="tab" aria-controls="nav-home" aria-selected="true">Data Uploads </a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                role="tab" aria-controls="nav-profile" aria-selected="false">Words Distribution</a>
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+                                role="tab" aria-controls="nav-home" aria-selected="true">Topic Modeling</a>
+                           <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
                                 role="tab" aria-controls="nav-contact" aria-selected="false">Topics Distribution</a>
                         </div>
                     </nav>
@@ -46,14 +44,17 @@
                             
                             <hr />
                             <div class="row" style="margin: 10px 10px">
-                                <div class="col-md-6 offset-3">
+                                <div class="offset-2 col-md-4">
+                                    <h6>Enter the daterange</h6>
+                                </div>
+                                <div class="col-md-6">
                                     <input type="text" id="daterange" style="width: 100%; height: 38px;" value="" />
                                 </div>
                             </div>
                             
                             <div class="row" style="margin: 10px 10px">
                                 <div class="offset-2 col-md-4">
-                                    <h5>Enter the number of topics</h5>
+                                    <h6>Enter the number of topics</h6>
                                 </div>
                                 <div class="col-md-4">
                                     <input id="no_topic_input" type="number" value="4" min="2" max="10" step="10"/>
@@ -62,7 +63,7 @@
 
                             <div class="row" style="margin: 10px 10px">
                                 <div class="offset-2 col-md-4">
-                                    <h5>Enter the number of words per topics</h5>
+                                    <h6>Enter the number of words per topics</h6>
                                 </div>
                                 <div class="col-md-4">
                                     <input id="no_word_input" type="number" value="100" min="0" max="1000" step="100"/>
@@ -73,15 +74,19 @@
                                     <button type="button" class="btn input-lg input-general" onclick="onDateInput()">Submit</button>
                                 </div>
                             </div>
+                            <div class="topic-table-container">
+                                <div class="row topic-box" id="topic-container">
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
                             <button class="topic-box">10 Topics with 20 words each</button>
                             <div class="topic-table-container">
                                 <div class="row topic-box" id="topic-container">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <div class="row">
                                 <div class="col-md-12" style="text-align: center; padding-top: 20px">
@@ -117,10 +122,6 @@
     </section>
 
 
-    <script src='./word-cloud.js'></script>
-    <script src='./test.js'></script>
-
-
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -141,9 +142,8 @@
         
     </script>
 
-    <script src='./word-cloud.js'></script>
-    <script src='./test.js'></script>
     <script src='./input_output.js'></script>
+
     <script>
         $(function () {
             $('#daterange').daterangepicker({

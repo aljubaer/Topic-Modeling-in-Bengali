@@ -1,5 +1,7 @@
 // jshint esversion: 6
 
+var colors = ['MediumVioletRed', 'DarkGreen', 'Red', 'MediumSlateBlue', 'Orange', 'Gold', 'Maroon', 'DarkBlue', 'DarkSlateGray', 'CadetBlue', 'Tomato', 'SeaGreen', 'Firebrick', 'BlueViolet', 'DimGray', 'DeepPink', 'Olive', 'RoyalBlue', 'Peru', 'DarkKhaki'];
+
 var startDate = ''
 var endDate = ''
 
@@ -48,7 +50,7 @@ function onDateInput() {
             for (let i = 0; i < Object.keys(topic_words).length; i++) {
                 var topic_words_str_i = '';
                 for (let j = 0; j < 20; j++) {
-                    topic_words_str_i += '<' + topic_words[i.toString()][j] + '(' + topic_contribs_100[i.toString()][j].toString() + '%)> | ';
+                    topic_words_str_i += '<' + topic_words[i.toString()][j] + '(' + topic_contribs_100[i.toString()][j] + '%)> | ';
                 }
                 topic_words_str.push(topic_words_str_i);
             }
