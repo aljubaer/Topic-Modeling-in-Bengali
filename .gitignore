@@ -1,3 +1,5 @@
 node_modules
-new_data
 data
+spinner-lib
+release-builds
+.vscode
