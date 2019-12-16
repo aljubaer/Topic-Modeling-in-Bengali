@@ -13,9 +13,6 @@ from gensim.test.utils import datapath
 from b_parser import RafiStemmer
 from datetime import datetime, timedelta
 import pandas as pd
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
 
 stemmer = RafiStemmer()
 
@@ -147,8 +144,7 @@ def ldaOutputProducer(lda_model, no_topics, no_words):
     print(out_json)
     return str(out_json)
 
-@app.route('/topic-models', methods=['POST'])
-def getTopicModels():
+def getTopicModels(request):
     start = request.get_json()['start']
     end = request.get_json()['end']
     no_topic = int(request.get_json()['number_topics'])
@@ -156,6 +152,3 @@ def getTopicModels():
     range_day_data_preprocessor(start, end)
     print(len(all_data))
     return ldaOutputProducer(run_lda(no_topic), no_topic, no_words)
-
-if __name__ == '__main__':
-    app.run(debug=True)

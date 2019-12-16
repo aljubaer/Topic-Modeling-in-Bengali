@@ -1,9 +1,7 @@
 import json
 import nltk
+nltk.download('punkt')
 from b_parser import RafiStemmer
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
 
 def valid_bengali_letters(char):
     return ord(char) >= 2433 and ord(char) <= 2543
@@ -180,8 +178,8 @@ def pred_topic(array):
 #json_file = open('input.json', encoding='utf-8')
 #raw_data_json = json.load(json_file)
 
-@app.route('/', methods=['POST'])
-def getClassification():
+#@app.route('/', methods=['POST'])
+def getClassification(request):
   raw_news_data = request.get_json()['news']
   words = {}
   for word in nltk.word_tokenize(raw_news_data):
@@ -196,5 +194,3 @@ def getClassification():
   #res['words'] = words
   return str(res)
 
-if __name__ == '__main__':
-  app.run(debug=True)
