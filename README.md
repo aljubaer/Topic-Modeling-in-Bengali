@@ -16,6 +16,7 @@ Install the dependencies
 
 Finally run this two command in two seperate terminals
 `python3 server.py`
+
 `npm start`
 
 ### Some sample screenshots
