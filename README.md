@@ -11,10 +11,12 @@ Go to the `gui` folder
 `cd gui` 
 
 Install the dependencies 
+
 `pip3 install gensim`
 `npm install` 
 
 Finally run this two command in two seperate terminals
+
 `python3 server.py`
 
 `npm start`
