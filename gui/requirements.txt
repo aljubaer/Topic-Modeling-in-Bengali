@@ -1,0 +1,10 @@
+flask
+bs4
+re
+requests
+json
+nltk
+gensim
+datetime
+pandas
+numpy
