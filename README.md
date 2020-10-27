@@ -1,5 +1,7 @@
 # Topic-Modeling-in-Bengali
 
+Visit the link(https://aljubaer.github.io/Topic-Modeling-in-Bengali/). App is hosted here.
+
 To run the project, follow the commands. Here you must have Node Js, Python3 and Flask installed.
 
 First clone the project 
