@@ -27,7 +27,7 @@
         "electron-packager": "^14.1.1"
     },
     "dependencies": {
-        "electron": "^6.0.12",
+        "electron": "^11.5.0",
         "python-shell": "^1.0.8"
     }
 }
